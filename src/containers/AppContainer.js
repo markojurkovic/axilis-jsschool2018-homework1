@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import App from "../components/App";
 import axios from "axios";
-import uuid from "uuid";
 
 class AppContainer extends Component {
     constructor() {
@@ -19,13 +18,10 @@ class AppContainer extends Component {
     handleIsDoneToggle = async (todoId, isDone) => {
         try {
             this.setState({ isLoading: true });
-            let resp = await axios.put(
-                "https://react.axilis.com/jurkovic/todo/",
-                {
-                    id: todoId,
-                    isDone: isDone
-                }
-            );
+            await axios.put("https://react.axilis.com/jurkovic/todo/", {
+                id: todoId,
+                isDone: isDone
+            });
         } catch (err) {
             this.setState({ hasError: true });
         } finally {
@@ -91,7 +87,7 @@ class AppContainer extends Component {
     handleTrashClicked = async todoId => {
         try {
             this.setState({ isLoading: true });
-            let resp = await axios.delete(
+            await axios.delete(
                 "https://react.axilis.com/jurkovic/todo/" + todoId
             );
 
